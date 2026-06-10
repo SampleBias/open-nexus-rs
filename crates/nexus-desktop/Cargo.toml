@@ -6,6 +6,10 @@ rust-version = "1.80"
 license = "GPL-2.0-only"
 description = "Open Nexus native desktop app (Tauri 2): prediction form, results, SHAP chart"
 
+[lib]
+name = "nexus_desktop"
+path = "src/lib.rs"
+
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 

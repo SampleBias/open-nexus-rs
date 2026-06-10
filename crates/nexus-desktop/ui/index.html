@@ -7,49 +7,136 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Open Nexus</h1>
-      <p class="subtitle">Cancer-of-unknown-primary classification (OncoNPC, native Rust)</p>
-    </header>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo" title="Open Nexus">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M2 12h20" />
+            <circle cx="12" cy="12" r="9" />
+          </svg>
+        </div>
+        <nav>
+          <button class="nav-item active" title="Dashboard" aria-label="Dashboard">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="nav-item" title="Explanations" aria-label="Explanations">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </button>
+        </nav>
+        <div class="avatar" title="Researcher">AY</div>
+      </aside>
 
-    <main>
-      <section class="panel">
-        <h2>Patient molecular profile</h2>
-        <form id="patient-form">
-          <label>Age<input type="number" id="age" value="65" min="0" max="120" /></label>
-          <label>Sex
-            <select id="gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </label>
-          <label>CNA events
-            <input type="text" id="cna" placeholder="RAF1 2 | PPARG 2" />
-          </label>
-          <label>Mutations
-            <input type="text" id="mutations" placeholder="ERBB2, chr17, 37868208, C, T" />
-          </label>
-          <div class="actions">
-            <button type="button" id="predict-btn">Predict</button>
-            <button type="button" id="explain-btn">Explain (SHAP)</button>
+      <!-- Main content -->
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1>Open Nexus</h1>
+            <p class="subtitle">Cancer-of-unknown-primary classification &middot; native Rust engine</p>
           </div>
-        </form>
-      </section>
+          <div class="topbar-right">
+            <div class="search">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="search" placeholder="Search sample ID..." />
+            </div>
+            <span class="status-pill" id="engine-status">
+              <span class="dot"></span> Engine ready
+            </span>
+          </div>
+        </header>
 
-      <section class="panel">
-        <h2>Predictions</h2>
-        <table id="results">
-          <thead><tr><th>Cancer type</th><th>Probability</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </section>
+        <!-- Stat cards row -->
+        <section class="stats">
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="stat-body">
+              <span class="stat-label">Top Prediction</span>
+              <span class="stat-value" id="stat-top">&mdash;</span>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+            </div>
+            <div class="stat-body">
+              <span class="stat-label">Confidence</span>
+              <span class="stat-value" id="stat-conf">&mdash;</span>
+            </div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="stat-body">
+              <span class="stat-label">Candidate Types</span>
+              <span class="stat-value" id="stat-count">&mdash;</span>
+            </div>
+          </article>
+        </section>
 
-      <section class="panel">
-        <h2>Explanation</h2>
-        <div id="shap-chart">Run an explanation to see SHAP feature contributions.</div>
-      </section>
-    </main>
+        <!-- Dashboard grid -->
+        <section class="grid">
+          <article class="panel panel-form">
+            <div class="panel-head">
+              <h2>Patient molecular profile</h2>
+            </div>
+            <form id="patient-form" class="form-grid">
+              <label>Age
+                <input type="number" id="age" value="65" min="0" max="120" />
+              </label>
+              <label>Sex
+                <select id="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </label>
+              <label class="full">CNA events
+                <input type="text" id="cna" placeholder="RAF1 2 | PPARG 2" />
+              </label>
+              <label class="full">Mutations
+                <input type="text" id="mutations" placeholder="ERBB2, chr17, 37868208, C, T" />
+              </label>
+            </form>
+            <div class="cta">
+              <div class="cta-copy">
+                <strong>Run the native engine</strong>
+                <span>Inference and exact Tree SHAP, fully offline.</span>
+              </div>
+              <div class="cta-actions">
+                <button type="button" id="predict-btn">Predict</button>
+                <button type="button" id="explain-btn" class="ghost">Explain</button>
+              </div>
+            </div>
+          </article>
 
-    <script type="module" src="main.js"></script>
+          <article class="panel panel-gauge">
+            <div class="panel-head"><h2>Posterior</h2></div>
+            <div class="gauge" id="gauge">
+              <div class="gauge-center">
+                <span class="gauge-value" id="gauge-value">&ndash;&ndash;%</span>
+                <span class="gauge-sub">max posterior</span>
+              </div>
+            </div>
+            <p class="gauge-caption" id="gauge-caption">Run a prediction to populate.</p>
+          </article>
+
+          <article class="panel panel-results">
+            <div class="panel-head"><h2>Predictions</h2></div>
+            <ul class="bars" id="results">
+              <li class="empty">No predictions yet.</li>
+            </ul>
+          </article>
+
+          <article class="panel panel-chart">
+            <div class="panel-head"><h2>SHAP explanation</h2></div>
+            <div id="shap-chart" class="chart-empty">Run an explanation to see SHAP feature contributions.</div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="main.js"></script>
   </body>
 </html>
