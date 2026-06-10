@@ -1,0 +1,29 @@
+{
+  "learner": {
+    "feature_names": ["ERBB2", "RAF1 CNA", "SBS1", "Age", "Sex"],
+    "learner_model_param": { "base_score": "5E-1", "num_class": "2", "num_feature": "5" },
+    "gradient_booster": {
+      "model": {
+        "tree_info": [0, 1],
+        "trees": [
+          {
+            "left_children": [1, -1, -1],
+            "right_children": [2, -1, -1],
+            "split_indices": [0, 0, 0],
+            "split_conditions": [0.5, -1.0, 1.5],
+            "default_left": [1, 0, 0],
+            "sum_hessian": [20.0, 10.0, 10.0]
+          },
+          {
+            "left_children": [1, -1, -1],
+            "right_children": [2, -1, -1],
+            "split_indices": [3, 0, 0],
+            "split_conditions": [1.0, -1.0, 1.5],
+            "default_left": [1, 0, 0],
+            "sum_hessian": [20.0, 10.0, 10.0]
+          }
+        ]
+      }
+    }
+  }
+}

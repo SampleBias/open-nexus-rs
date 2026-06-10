@@ -1,0 +1,18 @@
+[package]
+name = "nexus-data"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Polars-backed I/O for Open Nexus: Parquet/TSV feature matrices, JSON artifacts, signature CSVs"
+
+[dependencies]
+nexus-core.workspace = true
+nexus-genomics.workspace = true
+polars.workspace = true
+ndarray.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+tempfile = "3"

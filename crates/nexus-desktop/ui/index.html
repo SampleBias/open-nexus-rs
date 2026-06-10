@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Nexus</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Open Nexus</h1>
+      <p class="subtitle">Cancer-of-unknown-primary classification (OncoNPC, native Rust)</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Patient molecular profile</h2>
+        <form id="patient-form">
+          <label>Age<input type="number" id="age" value="65" min="0" max="120" /></label>
+          <label>Sex
+            <select id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </label>
+          <label>CNA events
+            <input type="text" id="cna" placeholder="RAF1 2 | PPARG 2" />
+          </label>
+          <label>Mutations
+            <input type="text" id="mutations" placeholder="ERBB2, chr17, 37868208, C, T" />
+          </label>
+          <div class="actions">
+            <button type="button" id="predict-btn">Predict</button>
+            <button type="button" id="explain-btn">Explain (SHAP)</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Predictions</h2>
+        <table id="results">
+          <thead><tr><th>Cancer type</th><th>Probability</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Explanation</h2>
+        <div id="shap-chart">Run an explanation to see SHAP feature contributions.</div>
+      </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

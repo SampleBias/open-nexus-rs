@@ -1,0 +1,32 @@
+[package]
+name = "nexus-api"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Open Nexus REST API (Axum) implementing the documented prediction service contract"
+
+[[bin]]
+name = "nexus-api"
+path = "src/main.rs"
+
+[dependencies]
+nexus-core.workspace = true
+nexus-genomics.workspace = true
+nexus-ml.workspace = true
+nexus-shap.workspace = true
+nexus-data.workspace = true
+axum = "0.7"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+argon2 = "0.5"
+base64 = "0.22"
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }

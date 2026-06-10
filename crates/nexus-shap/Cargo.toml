@@ -1,0 +1,19 @@
+[package]
+name = "nexus-shap"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Exact native Tree SHAP explanations for Open Nexus XGBoost models"
+
+[dependencies]
+nexus-core.workspace = true
+nexus-ml.workspace = true
+ndarray.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+nexus-genomics.workspace = true
+nexus-viz.workspace = true
+ndarray.workspace = true
+tempfile = "3"

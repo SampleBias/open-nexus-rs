@@ -1,0 +1,25 @@
+[package]
+name = "nexus-desktop"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+license = "GPL-2.0-only"
+description = "Open Nexus native desktop app (Tauri 2): prediction form, results, SHAP chart"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Path deps into the core engine (this crate is its own workspace root).
+nexus-core = { path = "../nexus-core" }
+nexus-data = { path = "../nexus-data" }
+nexus-genomics = { path = "../nexus-genomics" }
+nexus-ml = { path = "../nexus-ml" }
+nexus-shap = { path = "../nexus-shap" }
+nexus-viz = { path = "../nexus-viz" }
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Make this an independent workspace so it is not pulled into the parent build.
+[workspace]

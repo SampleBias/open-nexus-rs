@@ -1,0 +1,14 @@
+[package]
+name = "nexus-ml"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Native XGBoost JSON inference, k-fold CV orchestration and metrics for Open Nexus"
+
+[dependencies]
+nexus-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ndarray.workspace = true
+thiserror.workspace = true

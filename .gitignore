@@ -1,0 +1,16 @@
+/target
+**/target
+Cargo.lock.bak
+*.swp
+.DS_Store
+
+# Local model artifacts / data (not committed; see docs)
+/artifacts
+/data
+/models
+examples/out
+
+# Tauri build output
+crates/nexus-desktop/gen
+crates/nexus-desktop/target
+node_modules

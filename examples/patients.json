@@ -1,0 +1,16 @@
+[
+  {
+    "sample_id": "PATIENT-1",
+    "age": 72,
+    "gender": "male",
+    "cna_events": "RAF1 2 | PPARG 2",
+    "mutations": "ERBB2, chr17, 10, C, T"
+  },
+  {
+    "sample_id": "PATIENT-2",
+    "age": 45,
+    "gender": "female",
+    "cna_events": "",
+    "mutations": "ERBB2, chr17, 6, C, T"
+  }
+]

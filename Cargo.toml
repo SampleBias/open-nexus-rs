@@ -1,0 +1,52 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/nexus-core",
+    "crates/nexus-data",
+    "crates/nexus-genomics",
+    "crates/nexus-ml",
+    "crates/nexus-shap",
+    "crates/nexus-viz",
+    "crates/nexus-cli",
+    "crates/nexus-api",
+    "crates/nexus-testkit",
+]
+# The desktop app depends on system libraries (webkit2gtk) and a JS toolchain,
+# so it is built separately and excluded from the default `cargo build --workspace`.
+exclude = ["crates/nexus-desktop"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+license = "GPL-2.0-only"
+authors = ["Open Nexus Rust Team"]
+repository = "https://github.com/SampleBias/Open_Nexus"
+description = "Rust-native cancer-of-unknown-primary (CUP) classification (OncoNPC lineage)"
+
+[workspace.dependencies]
+nexus-core = { path = "crates/nexus-core" }
+nexus-data = { path = "crates/nexus-data" }
+nexus-genomics = { path = "crates/nexus-genomics" }
+nexus-ml = { path = "crates/nexus-ml" }
+nexus-shap = { path = "crates/nexus-shap" }
+nexus-viz = { path = "crates/nexus-viz" }
+nexus-testkit = { path = "crates/nexus-testkit" }
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+thiserror = "2"
+anyhow = "1"
+ndarray = "0.16"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+polars = { version = "0.46", default-features = false, features = [
+    "lazy",
+    "parquet",
+    "csv",
+] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"

@@ -1,0 +1,4 @@
+{
+  "features": ["ERBB2", "RAF1 CNA", "SBS1", "Age", "Sex"],
+  "target_classes": ["Non-Small Cell Lung Cancer", "Colorectal Adenocarcinoma"]
+}
